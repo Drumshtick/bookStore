@@ -1,0 +1,23 @@
+
+article {
+  width: 65vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+      margin: 25px;
+      margin-top: 40px;
+    }
+  }
+}
+
+
