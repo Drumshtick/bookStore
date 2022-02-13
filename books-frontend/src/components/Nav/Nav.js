@@ -12,13 +12,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import styles from './nav-styles.scss';
-const pages = ['Manage Books'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import './nav-styles.scss';
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [currentPath, setCurrentPath] = React.useState(window.location.pathname);
   let manageActive = (currentPath === '/manage' ? true : false);
 
@@ -29,19 +26,12 @@ const ResponsiveAppBar = () => {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
     setCurrentPath(window.location.pathname);
   };
-  console.log(manageActive)
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-  console.log(currentPath);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -88,7 +78,7 @@ const ResponsiveAppBar = () => {
                 !manageActive && (
                 <MenuItem onClick={handleCloseNavMenu}>
                 <Link to="/manage">
-                  <Button variant="text">Manage Books</Button>
+                  <Typography textAlign="center">Manage Books</Typography>
                 </Link>
               </MenuItem>
               )}
@@ -96,7 +86,7 @@ const ResponsiveAppBar = () => {
                 manageActive && (
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Link to="/">
-                      <Button variant="text">Back to Books</Button>
+                      <Typography textAlign="center">Back to Books</Typography>
                     </Link>
                   </MenuItem>
                 )
@@ -116,7 +106,7 @@ const ResponsiveAppBar = () => {
             !manageActive && (
               <MenuItem onClick={handleCloseNavMenu}>
                 <Link to="/manage">
-                  <Button variant="text">Manage Books</Button>
+                  <Typography textAlign="center">Manage Books</Typography>
                 </Link>
               </MenuItem>
               )}
@@ -124,41 +114,11 @@ const ResponsiveAppBar = () => {
                 manageActive && (
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Link to="/">
-                      <Button variant="text">Back to Books</Button>
+                      <Typography textAlign="center">Back to Books</Typography>
                     </Link>
                   </MenuItem>
                 )
               }
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
