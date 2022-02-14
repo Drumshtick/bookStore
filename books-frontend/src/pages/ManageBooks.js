@@ -1,9 +1,21 @@
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import './styles/manageBooks.scss';
 
 const ManageBooks = () => {
   return (
-      <div>
-          <h1>Manage Books Page</h1>
-      </div>
+    <main>
+      <Card
+        sx={{
+          height: '90vh',
+          width: 'auto'
+        }}
+      >
+        <CardContent>
+
+        </CardContent>
+      </Card>
+    </main>
   )
 };
 
