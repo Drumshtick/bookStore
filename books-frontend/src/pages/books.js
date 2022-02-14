@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './styles/books.scss';
 import BooksList from '../components/BooksList/BooksList';
 import BookDetails from '../components/BookDetails/BookDetails';
-import NewBook from '../components/NewBook/NewBook';
+import NewBookButton from '../components/NewBookButton/NewBookButton';
 import Box from '@mui/material/Box'
 
 const books = [
@@ -133,7 +133,7 @@ const Books = (props) => {
         right: '15px'
       }}
     >
-      <NewBook />
+      <NewBookButton />
     </Box>
     </div>
   )
