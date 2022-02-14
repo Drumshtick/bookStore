@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.scss';
 import Books from './pages/books';
 import ManageBooks from './pages/ManageBooks';
-import Nav from './components/Nav/Nav';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
       <BrowserRouter>
