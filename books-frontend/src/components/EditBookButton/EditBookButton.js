@@ -1,8 +1,19 @@
 import Button from '@mui/material/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@mui/material/Tooltip';
+import { useNavigate } from "react-router-dom";
 
-const EditBookButton = () => {
+const EditBookButton = (props) => {
+  let navigate = useNavigate();
+  
+  console.log(props.activeBook.id)
+  const handleClick = () => {
+    navigate(`/edit/${props.activeBook.id}`, {
+      replace: true,
+      state: props.activeBook
+    });
+  };
+
   return (
     <Tooltip
       title="Edit Book"
@@ -19,6 +30,7 @@ const EditBookButton = () => {
           paddingLeft: '25px',
         }}
         variant="text"
+        onClick={handleClick}
       >
         <EditIcon
           fontSize='large' 
