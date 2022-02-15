@@ -6,11 +6,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 const BooksList = (props) => {
   const { books, setActiveBook } = props;
-  const bookTitles = books.map((book, i) => {
+
+  const bookKeys = Object.keys(books);
+
+  const bookTitles = bookKeys.map((book, i) => {
     return (
       <BooksListItem
         key={i}
-        book={book}
+        book={books[book]}
         setActiveBook={setActiveBook}
       />
     );
