@@ -7,7 +7,7 @@ import './BookDetails.scss';
 
 const BookDetails = (props) => {
   const { activeBook } = props;
-  console.log(activeBook)
+
   return (
     <article>
       <Card
@@ -19,7 +19,7 @@ const BookDetails = (props) => {
         }}
       >
         <div className='edit'>
-          <EditBook />
+          <EditBook activeBook={activeBook} />
         </div>
         <CardContent>
         <Box
