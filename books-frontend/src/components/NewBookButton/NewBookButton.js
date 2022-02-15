@@ -8,7 +8,7 @@ const NewBookButton = () => {
   const navigate  = useNavigate ();
 
   const handleClick = () => {
-    navigate('/manage')
+    navigate('/new')
   };
 
   return (
