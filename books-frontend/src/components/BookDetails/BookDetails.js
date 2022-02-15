@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import EditBook from '../EditBookButton/EditBookButton';
+import DeleteBookButton from '../DeleteBookButton/DeleteBookButton';
 import './BookDetails.scss';
 
 const BookDetails = (props) => {
@@ -20,6 +21,9 @@ const BookDetails = (props) => {
       >
         <div className='edit'>
           <EditBook activeBook={activeBook} />
+        </div>
+        <div className='delete'>
+          <DeleteBookButton activeBook={activeBook} />
         </div>
         <CardContent>
         <Box
