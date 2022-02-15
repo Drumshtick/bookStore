@@ -8,6 +8,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import DatePicker from "react-datepicker";
+import jsonAPI from '../api-config/jsonAPI';
+import axios from 'axios'
 import './styles/manageBooks.scss';
 import "react-datepicker/dist/react-datepicker.css";
 const ManageBooks = () => {
@@ -22,7 +24,16 @@ const ManageBooks = () => {
   const { id } = useParams();
   const navigate  = useNavigate ();
   const handleSubmit = (e) => {
-    console.log(e)
+    e.preventDefault();
+    jsonAPI.post('/books', {
+      name: 'cookie'
+    }, 'content-type: application/json')
+    .then(resp => {
+      console.log(resp)
+    })
+    .catch(err => {
+      console.log("ERR: ", err)
+    })
   };
 
   const handleClick = (props) => {
