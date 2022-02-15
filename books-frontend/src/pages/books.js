@@ -7,9 +7,7 @@ import useBookData from '../hooks/useBookData'
 
 const Books = (props) => {
   const { books, activeBook, setActiveBook } = useBookData();
-
-
-
+  
   return (
     <div className="books-container">
       <BooksList
