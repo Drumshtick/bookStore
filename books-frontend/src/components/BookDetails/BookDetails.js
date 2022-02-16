@@ -7,7 +7,7 @@ import DeleteBookButton from '../DeleteBookButton/DeleteBookButton';
 import './BookDetails.scss';
 
 const BookDetails = (props) => {
-  const { activeBook } = props;
+  const { activeBook, setActiveBook, setBooks } = props;
 
   return (
     <article>
@@ -23,7 +23,10 @@ const BookDetails = (props) => {
           <EditBook activeBook={activeBook} />
         </div>
         <div className='delete'>
-          <DeleteBookButton activeBook={activeBook} />
+          <DeleteBookButton
+            activeBook={activeBook}
+            setBooks={setBooks}
+          />
         </div>
         <CardContent>
         <Box
@@ -45,13 +48,13 @@ const BookDetails = (props) => {
             textAlign: 'center'
           }}
         >
-          {activeBook.name}
+          {activeBook && activeBook.name}
         </Typography>
         <Typography
           variant="h5"
           color="black"
         >
-          Author: {activeBook.author}
+          Author: {activeBook && activeBook.author}
         </Typography>
       </Box>
       <Box
@@ -68,8 +71,8 @@ const BookDetails = (props) => {
             flexDirection: 'row',
           }}
         >
-          <h5 className="book-publishing-data">IBSN: {activeBook.isbn}</h5>
-          <h5 className="book-publishing-data">Year published: {activeBook.year}</h5>
+          <h5 className="book-publishing-data">IBSN: {activeBook && activeBook.isbn}</h5>
+          <h5 className="book-publishing-data">Year published: {activeBook && activeBook.year}</h5>
         </Box>
         <Box
           sx={{
@@ -93,7 +96,7 @@ const BookDetails = (props) => {
                 padding: '20px'
               }}
             >
-              {activeBook.description}
+              {activeBook && activeBook.description}
             </Typography>
         </Box>
       </Box>
