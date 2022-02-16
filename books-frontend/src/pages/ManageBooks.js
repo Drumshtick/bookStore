@@ -27,19 +27,21 @@ const ManageBooks = () => {
       .then(resp => {
         const bookData = resp.data;
         let year = new Date(Number(bookData.year + 1), 0, 0, 0, 0, 0, 0);
-        setState({
-          ...state,
-          name: bookData.name,
-          author: bookData.author,
-          isbn: bookData.isbn,
-          year,
-          description: bookData.description
+        setState(prev => {
+          return {
+            ...prev,
+            name: bookData.name,
+            author: bookData.author,
+            isbn: bookData.isbn,
+            year,
+            description: bookData.description
+          };
         })
         console.log(state)
       })
       .catch()
     }
-  }, [id]);
+  });
   
 
   const navigate  = useNavigate ();
