@@ -126,13 +126,45 @@ router.put('/', verifyBookParams, (req, res) => {
     })
     .catch(err => {
       console.log("Error writing book: ", err)
-      return res.status(400).json({ error: 'Failed to write book' });
+      return res.status(500).json({ error: 'Failed to write book' });
     });
   })
   .catch(err => {
-    return res.status(400).json({ error: err });
+    return res.status(500).json({ error: err });
   });
 
+});
+
+router.delete('/', (req, res) => {
+  console.log(req.body)
+  if (!req.body.id) {
+    return res.status(400).json({ error: 'Failed to write book' });
+  }
+
+  const { id } = req.body;
+
+  getAllBooks()
+  .then(bookData => {
+    if (!bookData[id]) {
+      return res.status(500).json({ error: `Book with id of ${id} not found` })
+    }
+
+    delete bookData[id];
+
+    if (bookData[id]) {
+      return res.status(500).json({ error: `Book with id of ${id} delete failed` })
+    }
+    writeBook(bookData)
+    .then(() => {
+      return res.status(200).json({message: 'ok'});
+    })
+    .catch(err => {
+      return res.status(500).json({ error: `Book with id of ${id} write failed after delete` })
+    });
+  })
+  .catch(err => {
+    return res.status(500).json({ error: err });
+  });
 });
 
 function verifyBookParams(req, res, next) {
