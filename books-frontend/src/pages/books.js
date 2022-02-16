@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import useBookData from '../hooks/useBookData'
 
 const Books = (props) => {
-  const { books, activeBook, setActiveBook } = useBookData();
+  const { books, setBooks, activeBook, setActiveBook } = useBookData();
   
   return (
     <div className="books-container">
@@ -16,6 +16,8 @@ const Books = (props) => {
       />
       <BookDetails
         activeBook={activeBook}
+        setActiveBook={setActiveBook}
+        setBooks={setBooks}
       />
     <Box
       sx={{
