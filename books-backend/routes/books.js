@@ -52,7 +52,8 @@ router.post('/', verifyNewBookParams, function(req, res) {
     name,
     author,
     isbn,
-    year
+    year,
+    description
   } = req.body;
   getAllBooks()
   .then(result => {
@@ -63,7 +64,8 @@ router.post('/', verifyNewBookParams, function(req, res) {
       name,
       author,
       isbn,
-      year
+      year,
+      description
     }
     writeBook(result)
     .then(() => {
