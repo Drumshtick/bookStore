@@ -17,17 +17,20 @@ const ManageBooks = () => {
     name: '',
     author: '',
     isbn: '',
-    year: '',
+    year: new Date(),
     description: '',
-    date: 2022
   });
   const { id } = useParams();
   const navigate  = useNavigate ();
   const handleSubmit = (e) => {
     e.preventDefault();
     jsonAPI.post('/books', {
-      name: 'cookie'
-    }, 'content-type: application/json')
+      name: state.name,
+      author: state.author,
+      isbn: state.isbn,
+      year: state.year,
+      description: state.description
+    })
     .then(resp => {
       console.log(resp)
     })
@@ -39,6 +42,10 @@ const ManageBooks = () => {
   const handleClick = (props) => {
     navigate('/')
   };
+
+  console.log(state.year)
+  console.log(typeof state.year)
+
   return (
     <main>
       <Card
@@ -77,7 +84,12 @@ const ManageBooks = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="isbn">
             <Form.Label>ISBN&nbsp;&nbsp;(i.e 0439023483)</Form.Label>
-            <Form.Control required type="text" />
+            <Form.Control
+            required
+            type="text"
+            value={state.isbn}
+            onChange={(e) => setState({...state, isbn: e.target.value})}
+          />
           </Form.Group>
           <Form.Group className="mb-3" controlId="published">
             <Form.Label>Year published&nbsp;&nbsp;(i.e 2022)</Form.Label>
@@ -85,8 +97,8 @@ const ManageBooks = () => {
               className="datepicker form-control"
               showYearPicker
               dateFormat="yyyy"
-              selected={state.date}
-              onChange={(date) => setState({...state, date})}
+              selected={state.year}
+              onChange={(e) => setState({...state, year: e})}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="description">
