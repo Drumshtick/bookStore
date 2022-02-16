@@ -46,7 +46,12 @@ const ManageBooks = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postNewBook();
+    if (!id) {
+      postNewBook();
+      return;
+    } 
+
+    updateBook();
   };
 
   const postNewBook = () => {
@@ -66,7 +71,8 @@ const ManageBooks = () => {
   };
 
   const updateBook = () => {
-    jsonAPI.post('/books', {
+    jsonAPI.put('/books', {
+      id,
       name: state.name,
       author: state.author,
       isbn: state.isbn,
@@ -84,10 +90,6 @@ const ManageBooks = () => {
   const handleClick = (props) => {
     navigate('/')
   };
-
-  console.log(state.year)
-  console.log(typeof state.year)
-
   return (
     <main>
       <Card
