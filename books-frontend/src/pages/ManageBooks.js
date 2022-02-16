@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import DatePicker from "react-datepicker";
 import jsonAPI from '../api-config/jsonAPI';
-import axios from 'axios'
 import './styles/manageBooks.scss';
 import "react-datepicker/dist/react-datepicker.css";
 const ManageBooks = () => {
@@ -19,11 +18,38 @@ const ManageBooks = () => {
     isbn: '',
     year: new Date(),
     description: '',
-  });
+});
   const { id } = useParams();
+  
+  useEffect(() => {
+    if (id) {
+      jsonAPI.get(`/books/${id}`)
+      .then(resp => {
+        const bookData = resp.data;
+        let year = new Date(Number(bookData.year + 1), 0, 0, 0, 0, 0, 0);
+        setState({
+          ...state,
+          name: bookData.name,
+          author: bookData.author,
+          isbn: bookData.isbn,
+          year,
+          description: bookData.description
+        })
+        console.log(state)
+      })
+      .catch()
+    }
+  }, [id]);
+  
+
   const navigate  = useNavigate ();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    postNewBook();
+  };
+
+  const postNewBook = () => {
     jsonAPI.post('/books', {
       name: state.name,
       author: state.author,
@@ -32,7 +58,23 @@ const ManageBooks = () => {
       description: state.description
     })
     .then(resp => {
-      console.log(resp)
+      navigate('/');
+    })
+    .catch(err => {
+      console.log("ERR: ", err)
+    })
+  };
+
+  const updateBook = () => {
+    jsonAPI.post('/books', {
+      name: state.name,
+      author: state.author,
+      isbn: state.isbn,
+      year: state.year,
+      description: state.description
+    })
+    .then(resp => {
+      navigate('/');
     })
     .catch(err => {
       console.log("ERR: ", err)
