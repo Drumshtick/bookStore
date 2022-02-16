@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const EditBookButton = (props) => {
   let navigate = useNavigate();
   
-  console.log(props.activeBook.id)
   const handleClick = () => {
     navigate(`/edit/${props.activeBook.id}`, {
       replace: true,
