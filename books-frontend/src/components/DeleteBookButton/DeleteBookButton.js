@@ -5,11 +5,13 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import jsonAPI from '../../api-config/jsonAPI';
+
 const DeleteBookButton = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const { activeBook } = props;
+  const { activeBook, setBooks } = props;
   const style = {
     position: 'absolute',
     top: '50%',
@@ -25,9 +27,26 @@ const DeleteBookButton = (props) => {
 
   const handleDelete = () => {
     setOpen(false);
-    console.log("DELETED")
+    deleteBook();
   };
 
+  const deleteBook = () => {
+    jsonAPI.delete('/books', {data: {id: activeBook.id}})
+    .then(resp => {
+      console.log("success!");
+      setBooks(prev => {
+        console.log(prev)
+        delete prev[activeBook.id];
+        console.log(prev)
+        return {
+          ...prev
+        };
+      })
+    })
+    .catch(err => {
+      console.log("ERR: ", err);
+    });
+  };
 
   return (
 
